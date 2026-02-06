@@ -1,0 +1,65 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+@layer utilities {
+
+    body {
+        background: #111;
+        color: white;
+    }
+
+    .animate-in {
+        animation-duration: 0.8s;
+        animation-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .fade-in {
+        animation-name: fadeIn;
+    }
+
+    .slide-in-from-left {
+        animation-name: slideInLeft;
+    }
+
+    .slide-in-from-right {
+        animation-name: slideInRight;
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes slideInLeft {
+    from {
+        transform: translateX(-500px);
+    }
+
+    to {
+        transform: translateX(0);
+    }
+}
+
+@keyframes slideInRight {
+    from {
+        transform: translateX(500px);
+    }
+
+    to {
+        transform: translateX(0);
+    }
+}
+html {
+    scroll-behavior: smooth;
+}
+
+/* This ensures the header doesn't cover the section title when you land */
+.scroll-mt-24 {
+    scroll-margin-top: 6rem;
+}
