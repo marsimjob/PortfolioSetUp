@@ -8,11 +8,12 @@ const skills = [
   "SQL Server",
   "Azure",
   "Tailwind",
+  "AI",
 ];
 
 export default function ToolboxBar() {
   return (
-    <div className="mt-6 border-y border-zinc-800/60 py-4">
+    <div className="border-y border-zinc-800/60 py-10">
       <div className="flex flex-wrap items-center gap-3 text-sm text-zinc-400">
         <span className="uppercase tracking-widest text-xs text-zinc-500">
           In The Toolbox:
