@@ -1,6 +1,6 @@
 import { useRef } from "react";
 import { motion } from "framer-motion";
-import emailjs from "emailjs-com";
+import emailjs from "@emailjs/browser";
 
 export default function Contact() {
     const form = useRef();
@@ -8,12 +8,25 @@ export default function Contact() {
     const sendEmail = (e) => {
         e.preventDefault();
 
+        emailjs.init(import.meta.env.VITE_EMAILJS_PUBLIC_KEY);
+
+
         emailjs.sendForm(
-            "service_qcmems4",
-            "template_8dyvbpk",
+            import.meta.env.VITE_EMAILJS_SERVICE_ID,
+            import.meta.env.VITE_EMAILJS_TEMPLATE_ID,
             form.current,
-            "f-P3G5Y9NbDEMLiXr"
-        );
+            import.meta.env.VITE_EMAILJS_PUBLIC_KEY
+        )
+            .then(
+                (result) => {
+                    console.log("SUCCESS:", result.text);
+                    alert("Message sent!");
+                },
+                (error) => {
+                    console.error("FAILED:", error);
+                    alert("Failed to send message");
+                }
+            );
     };
 
     return (
