@@ -1,6 +1,6 @@
-export const skills = [
+const skillsData = [
   {
-    title: "Backend, .NET & Architecture",
+    title: { en: "Backend, .NET & Architecture", sv: "Backend, .NET & Arkitektur" },
     items: [
       "OOP, Clean Architecture, DTOs",
       ".NET Core, Minimal APIs, MVC",
@@ -9,7 +9,7 @@ export const skills = [
     ],
   },
   {
-    title: "Security & Identity",
+    title: { en: "Security & Identity", sv: "S\u00E4kerhet & Identitet" },
     items: [
       "JWT Auth, Roles & Permissions",
       "Identity, 2FA, TOTP",
@@ -17,7 +17,7 @@ export const skills = [
     ],
   },
   {
-    title: "Frontend, React & UI",
+    title: { en: "Frontend, React & UI", sv: "Frontend, React & UI" },
     items: [
       "React, Tailwind CSS",
       "API consumption with Axios",
@@ -26,3 +26,10 @@ export const skills = [
     ],
   },
 ];
+
+export function getSkills(lang) {
+  return skillsData.map((group) => ({
+    ...group,
+    title: group.title[lang] || group.title.en,
+  }));
+}

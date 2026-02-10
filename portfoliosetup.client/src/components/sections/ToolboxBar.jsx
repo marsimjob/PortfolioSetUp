@@ -1,3 +1,5 @@
+import { useLanguage } from "../../context/LanguageContext";
+
 const skills = [
   ".NET",
   "ASP.NET Core",
@@ -12,11 +14,13 @@ const skills = [
 ];
 
 export default function ToolboxBar() {
+  const { t } = useLanguage();
+
   return (
     <div className="border-y border-zinc-800/60 py-10">
       <div className="flex flex-wrap items-center gap-3 text-sm text-zinc-400">
-        <span className="uppercase tracking-widest text-xs text-zinc-500">
-          In The Toolbox:
+        <span className="uppercase tracking-widest text-xs font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-emerald-400">
+          {t("toolbox.label")}
         </span>
 
         {skills.map((skill) => (

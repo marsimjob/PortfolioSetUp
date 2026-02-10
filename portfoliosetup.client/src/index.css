@@ -6,6 +6,21 @@
     body {
         background: #111;
         color: white;
+        position: relative;
+        overflow-x: hidden;
+    }
+
+    body::after {
+        content: "";
+        position: fixed;
+        inset: 0;
+        z-index: -1;
+        background:
+            radial-gradient(ellipse at 15% 0%, rgba(124, 58, 237, 0.2) 0%, transparent 50%),
+            radial-gradient(ellipse at 85% 100%, rgba(16, 185, 129, 0.15) 0%, transparent 50%),
+            radial-gradient(ellipse at 50% 30%, rgba(124, 58, 237, 0.08) 0%, transparent 40%),
+            radial-gradient(ellipse at 50% 50%, rgba(0, 0, 0, 0.3) 0%, transparent 80%);
+        pointer-events: none;
     }
 
     .animate-in {
