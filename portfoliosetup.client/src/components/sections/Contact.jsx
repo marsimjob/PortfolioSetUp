@@ -10,21 +10,25 @@ export default function Contact() {
         e.preventDefault();
         setStatus("sending");
 
+        emailjs.init(import.meta.env.VITE_EMAILJS_PUBLIC_KEY);
+
+
         emailjs.sendForm(
-            process.env.REACT_APP_EMAILJS_SERVICE_ID,
-            process.env.REACT_APP_EMAILJS_TEMPLATE_ID,
+            import.meta.env.VITE_EMAILJS_SERVICE_ID,
+            import.meta.env.VITE_EMAILJS_TEMPLATE_ID,
             form.current,
-            process.env.REACT_APP_EMAILJS_PUBLIC_KEY
-        ).then(
-            () => {
-                setStatus("success");
-                form.current.reset();
-            },
-            (error) => {
-                console.error("EmailJS error:", error);
-                setStatus("error");
-            }
-        );
+            import.meta.env.VITE_EMAILJS_PUBLIC_KEY
+        )
+            .then(
+                (result) => {
+                    console.log("SUCCESS:", result.text);
+                    alert("Message sent!");
+                },
+                (error) => {
+                    console.error("FAILED:", error);
+                    alert("Failed to send message");
+                }
+            );
     };
 
     return (
