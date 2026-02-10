@@ -2,7 +2,7 @@ import profileImg from "../../data/images/myimage.jpg";
 
 export default function ProfileImage({ size = "w-48 h-48" }) {
     // This defines the 6 points of the hexagon
-    const hexPath = "polygon(25% 0%, 75% 0%, 100% 50%, 75% 100%, 25% 100%, 0% 50%)";
+    const hexPath = "polygon(15% 0%, 85% 0%, 100% 50%, 85% 100%, 15% 100%, 0% 50%)";
 
     return (
         <div className={`relative ${size} group`}>

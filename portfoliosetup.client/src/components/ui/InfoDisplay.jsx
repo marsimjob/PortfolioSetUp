@@ -18,6 +18,16 @@ export default function InfoDisplay({ project }) {
             <p className="text-zinc-400 text-lg leading-relaxed max-w-3xl">
                 {project.details}
             </p>
+            {project.repo && (
+                <a
+                    href={project.repo}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-2 text-sm font-bold text-black bg-gradient-to-r from-purple-400 to-emerald-400 rounded-full px-5 py-2.5 shadow-lg hover:scale-105 transition-transform"
+                >
+                    View on GitHub
+                </a>
+            )}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 {project.images.map((src, index) => (
                     <img

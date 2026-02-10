@@ -33,7 +33,7 @@ export default function HeroTestimonials() {
     }, [currentQuote, quotes.length]);
 
     return (
-        <div className="flex flex-col max-w-3xl w-full mt-13">
+        <div className="flex flex-col max-w-3xl w-full">
             <AnimatePresence mode="wait">
                 <motion.div
                     key={currentQuote}
@@ -41,7 +41,7 @@ export default function HeroTestimonials() {
                     animate={{ opacity: 1, y: 0 }}
                     exit={{ opacity: 0, y: -20 }}
                     transition={{ duration: 0.8, ease: "easeInOut" }}
-                    className="bg-zinc-800 rounded-xl p-6 shadow-lg text-center"
+                    className="bg-zinc-950 rounded-xl p-6 shadow-lg text-center border border-zinc-800"
                 >
                     <p className="text-zinc-200 italic">"{quotes[currentQuote].text}"</p>
                     <p className="mt-4 font-semibold text-white">{quotes[currentQuote].name}</p>

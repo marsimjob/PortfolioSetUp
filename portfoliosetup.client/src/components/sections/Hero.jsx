@@ -4,10 +4,10 @@ import HeroTestimonials from "./HeroTestimonials";
 
 export default function Hero() {
     return (
-        <section className="relative flex flex-col items-center justify-center py-20 px-3 space-y-16">
+        <section className="relative flex flex-col items-center justify-center px-6 space-y-16">
             {/* Background glow */}
             <div className="absolute -top-20 w-72 h-72 bg-purple-600/20 blur-[120px] rounded-full -z-10" />
-            <div className="flex flex-col md:flex-row items-center gap-14 max-w-6xl w-full">
+            <div className="flex flex-col md:flex-row items-center gap-10 max-w-6xl w-full">
                 {/* Slide from left */}
                 <motion.div
                     initial={{ opacity: 0, x: -80 }}
@@ -15,7 +15,7 @@ export default function Hero() {
                     transition={{ duration: 0.8, ease: "easeOut" }}
                     className="flex-shrink-0"
                 >
-                    <ProfileImage size="w-36 h-52 md:w-56 md:h-72" />
+                    <ProfileImage size="w-44 h-64 md:w-64 md:h-96" />
                 </motion.div>
 
                 {/* Text */}
@@ -29,7 +29,7 @@ export default function Hero() {
                     <div className="space-y-2">
                         <h1 className="text-5xl md:text-7xl font-black tracking-tight text-white">
                             Mario Alexandar Simic
-                            <span className="block text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-emerald-400 mt-2 mb-2">
+                            <span className="block text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-emerald-400 mt-2 mb-2 tracking-[0.25em]">
                                 SOFTWARE ENGINEER
                             </span>
                         </h1>
@@ -53,14 +53,14 @@ export default function Hero() {
                     <div className="w-full h-1 bg-gradient-to-r from-purple-400 to-emerald-400 rounded-full" />
 
                     {/* Buttons side by side */}
-                    <div className="flex flex-col md:flex-row items-center gap-4 mt-4">
+                    <div className="w-full flex flex-col md:flex-row items-center justify-center gap-4 mt-4">
                         {/* Scroll to Projects button */}
                         <motion.button
                             onClick={scrollToProjects}
                             initial={{ opacity: 0, y: -30 }}
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ duration: 0.6, delay: 0.6, ease: "easeInOut" }}
-                            className="group relative inline-flex items-center justify-center px-8 py-6 rounded-full 
+                            className="group relative flex-1 inline-flex items-center justify-center px-8 py-6 rounded-full
                          bg-gradient-to-r from-purple-400 to-emerald-400 text-white font-bold shadow-lg overflow-hidden
                          transition-transform hover:scale-105"
                         >
@@ -72,13 +72,13 @@ export default function Hero() {
                         </motion.button>
 
                         {/* OR separator */}
-                        <span className="text-zinc-400 text-sm hidden md:inline">OR</span>
+                        <span className="text-zinc-400 text-sm font-medium">OR</span>
 
                         {/* Download CV */}
                         <a
                             href="/documents/Mario_Alexandar_Simic_CV.pdf"
                             download
-                            className="px-8 py-6 rounded-full border border-zinc-700 text-white hover:bg-zinc-800 transition"
+                            className="flex-1 text-center px-8 py-6 rounded-full border border-zinc-700 text-white hover:bg-zinc-800 transition"
                         >
                             📄 Download CV
                         </a>
@@ -91,12 +91,17 @@ export default function Hero() {
 
 function GitHubContributions({ gitHubUserName }) {
     return (
-        <div className="w-full overflow-x-auto rounded-xl bg-zinc-900 p-4 border border-zinc-800">
-            <img
-                src={`https://ghchart.rshah.org/7c3aed/${gitHubUserName}`}
-                alt="GitHub Contributions"
-                className="w-full"
-            />
+        <div className="w-full rounded-2xl bg-zinc-900 p-5 border border-zinc-800 shadow-lg">
+            <h3 className="text-sm font-bold uppercase tracking-widest text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-emerald-400 mb-3">
+                GitHub Contributions
+            </h3>
+            <div className="overflow-x-auto rounded-lg bg-zinc-950 p-3 border border-zinc-700">
+                <img
+                    src={`https://ghchart.rshah.org/7c3aed/${gitHubUserName}`}
+                    alt="GitHub Contributions"
+                    className="w-full"
+                />
+            </div>
         </div>
     );
 }

@@ -4,8 +4,11 @@ import { motion } from "framer-motion";
 
 export default function Projects({ onSelect, activeItem }) {
     return (
-        <>
-            <h2 className="text-4xl font-bold text-accent">Projects</h2>
+        <div className="space-y-8">
+            <div className="space-y-3">
+                <h2 className="text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-emerald-400">Projects</h2>
+                <p className="text-zinc-400">A selection of what I've been building.</p>
+            </div>
 
             <motion.div
                 className="grid gap-6 md:grid-cols-2"
@@ -34,6 +37,6 @@ export default function Projects({ onSelect, activeItem }) {
                     </motion.div>
                 ))}
             </motion.div>
-        </>
+        </div>
     );
 }

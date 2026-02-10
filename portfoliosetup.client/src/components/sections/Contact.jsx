@@ -1,70 +1,95 @@
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import { motion } from "framer-motion";
-import emailjs from "emailjs-com";
+import emailjs from "@emailjs/browser";
 
 export default function Contact() {
     const form = useRef();
+    const [status, setStatus] = useState(null);
 
     const sendEmail = (e) => {
         e.preventDefault();
+        setStatus("sending");
 
         emailjs.sendForm(
-            "service_qcmems4",
-            "template_8dyvbpk",
+            process.env.REACT_APP_EMAILJS_SERVICE_ID,
+            process.env.REACT_APP_EMAILJS_TEMPLATE_ID,
             form.current,
-            "f-P3G5Y9NbDEMLiXr"
+            process.env.REACT_APP_EMAILJS_PUBLIC_KEY
+        ).then(
+            () => {
+                setStatus("success");
+                form.current.reset();
+            },
+            (error) => {
+                console.error("EmailJS error:", error);
+                setStatus("error");
+            }
         );
     };
 
     return (
-        <section className="flex justify-center px-6">
+        <section className="flex justify-center px-6 w-full">
             <motion.div
-                initial={{ opacity: 0, x: 80 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.8, ease: "easeInOut" }}
-                className="bg-zinc-900 rounded-2xl shadow-2xl p-8 w-full max-w-lg"
+                initial={{ opacity: 0, y: 60 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.2 }}
+                transition={{ duration: 0.8, ease: "easeOut" }}
+                className="bg-zinc-950 rounded-2xl shadow-2xl p-8 w-full max-w-2xl border border-zinc-800"
             >
-                <h2 className="text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-emerald-400 mb-6">
-                    Contact Me
-                </h2>
+                <div className="space-y-3 mb-6">
+                    <h2 className="text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-emerald-400">
+                        Contact Me
+                    </h2>
+                    <p className="text-zinc-400">Got a question or want to work together? Reach out.</p>
+                </div>
 
-                <form ref={form} onSubmit={sendEmail} className="space-y-4">
+                <form ref={form} onSubmit={sendEmail} className="space-y-5">
                     <input
                         type="text"
                         name="from_name"
                         placeholder="Your name"
-                        className="w-full p-3 rounded-lg bg-zinc-800 placeholder:text-zinc-400 focus:outline-none focus:ring-2 focus:ring-purple-400 transition"
+                        className="w-full p-3 rounded-lg bg-zinc-900 border border-zinc-800 text-white placeholder:text-zinc-500 focus:outline-none focus:ring-2 focus:ring-purple-400 focus:border-transparent transition"
                     />
 
                     <input
                         type="email"
                         name="reply_to"
                         placeholder="Your email"
-                        className="w-full p-3 rounded-lg bg-zinc-800 placeholder:text-zinc-400 focus:outline-none focus:ring-2 focus:ring-purple-400 transition"
+                        className="w-full p-3 rounded-lg bg-zinc-900 border border-zinc-800 text-white placeholder:text-zinc-500 focus:outline-none focus:ring-2 focus:ring-purple-400 focus:border-transparent transition"
                     />
 
                     <textarea
                         name="message"
                         placeholder="Your message"
                         rows={5}
-                        className="w-full p-3 rounded-lg bg-zinc-800 placeholder:text-zinc-400 focus:outline-none focus:ring-2 focus:ring-purple-400 transition resize-none"
+                        className="w-full p-3 rounded-lg bg-zinc-900 border border-zinc-800 text-white placeholder:text-zinc-500 focus:outline-none focus:ring-2 focus:ring-purple-400 focus:border-transparent transition resize-none"
                     ></textarea>
 
                     <motion.button
                         type="submit"
+                        disabled={status === "sending"}
                         whileHover={{ scale: 1.05 }}
                         whileTap={{ scale: 0.95 }}
-                        className="relative inline-flex items-center justify-center px-6 py-3 rounded-full 
-                       bg-gradient-to-r from-purple-400 to-emerald-400 
-                       text-black font-bold shadow-lg overflow-hidden"
+                        className="relative inline-flex items-center justify-center px-6 py-3 rounded-full
+                       bg-gradient-to-r from-purple-400 to-emerald-400
+                       text-black font-bold shadow-lg overflow-hidden disabled:opacity-50"
                     >
-                        <span className="relative z-10">Send Message</span>
+                        <span className="relative z-10">
+                            {status === "sending" ? "Sending..." : "Send Message"}
+                        </span>
                         <span className="absolute inset-0 bg-white opacity-0 hover:opacity-10 rounded-full transition-opacity"></span>
                     </motion.button>
+
+                    {status === "success" && (
+                        <p className="text-emerald-400 text-sm">Message sent successfully!</p>
+                    )}
+                    {status === "error" && (
+                        <p className="text-red-400 text-sm">Failed to send message. Please try again.</p>
+                    )}
                 </form>
 
                 {/* Social Buttons */}
-                <div className="flex justify-center gap-4 mt-6">
+                <div className="flex justify-center gap-4 mt-8">
                     <motion.a
                         href="https://github.com/marsimjob"
                         target="_blank"

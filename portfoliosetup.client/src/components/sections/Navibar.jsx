@@ -8,7 +8,7 @@ export default function Navbar() {
 
   return (
     <nav className="fixed top-6 left-1/2 -translate-x-1/2 z-50">
-      <div className="flex items-center gap-8 px-6 py-3 rounded-full bg-zinc-900/80 backdrop-blur-md border border-zinc-800 shadow-xl">
+      <div className="flex items-center gap-8 px-6 py-3 rounded-full bg-zinc-950/80 backdrop-blur-md border border-zinc-800 shadow-xl shadow-purple-500/5">
         {navLinks.map((link) => (
           <a
             key={link.name}

@@ -5,7 +5,7 @@ export default function ProjectCard({
   title,
   description,
   highlights = [],
-    languages = [],
+  languages = [],
   onClick,
   isActive,
 }) {
