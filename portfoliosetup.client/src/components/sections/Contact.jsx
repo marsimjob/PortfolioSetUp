@@ -1,10 +1,12 @@
 import { useRef, useState } from "react";
 import { motion } from "framer-motion";
 import emailjs from "@emailjs/browser";
+import { useLanguage } from "../../context/LanguageContext";
 
 export default function Contact() {
     const form = useRef();
     const [status, setStatus] = useState(null);
+    const { t } = useLanguage();
 
     const sendEmail = (e) => {
         e.preventDefault();
@@ -38,29 +40,29 @@ export default function Contact() {
             >
                 <div className="space-y-3 mb-6">
                     <h2 className="text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-emerald-400">
-                        Contact Me
+                        {t("contact.heading")}
                     </h2>
-                    <p className="text-zinc-400">Got a question or want to work together? Reach out.</p>
+                    <p className="text-zinc-400">{t("contact.subtitle")}</p>
                 </div>
 
                 <form ref={form} onSubmit={sendEmail} className="space-y-5">
                     <input
                         type="text"
                         name="from_name"
-                        placeholder="Your name"
+                        placeholder={t("contact.name")}
                         className="w-full p-3 rounded-lg bg-zinc-900 border border-zinc-800 text-white placeholder:text-zinc-500 focus:outline-none focus:ring-2 focus:ring-purple-400 focus:border-transparent transition"
                     />
 
                     <input
                         type="email"
                         name="reply_to"
-                        placeholder="Your email"
+                        placeholder={t("contact.email")}
                         className="w-full p-3 rounded-lg bg-zinc-900 border border-zinc-800 text-white placeholder:text-zinc-500 focus:outline-none focus:ring-2 focus:ring-purple-400 focus:border-transparent transition"
                     />
 
                     <textarea
                         name="message"
-                        placeholder="Your message"
+                        placeholder={t("contact.message")}
                         rows={5}
                         className="w-full p-3 rounded-lg bg-zinc-900 border border-zinc-800 text-white placeholder:text-zinc-500 focus:outline-none focus:ring-2 focus:ring-purple-400 focus:border-transparent transition resize-none"
                     ></textarea>
@@ -75,16 +77,16 @@ export default function Contact() {
                        text-black font-bold shadow-lg overflow-hidden disabled:opacity-50"
                     >
                         <span className="relative z-10">
-                            {status === "sending" ? "Sending..." : "Send Message"}
+                            {status === "sending" ? t("contact.sending") : t("contact.send")}
                         </span>
                         <span className="absolute inset-0 bg-white opacity-0 hover:opacity-10 rounded-full transition-opacity"></span>
                     </motion.button>
 
                     {status === "success" && (
-                        <p className="text-emerald-400 text-sm">Message sent successfully!</p>
+                        <p className="text-emerald-400 text-sm">{t("contact.success")}</p>
                     )}
                     {status === "error" && (
-                        <p className="text-red-400 text-sm">Failed to send message. Please try again.</p>
+                        <p className="text-red-400 text-sm">{t("contact.error")}</p>
                     )}
                 </form>
 
@@ -98,7 +100,7 @@ export default function Contact() {
                         whileTap={{ scale: 0.95 }}
                         className="px-6 py-3 rounded-full bg-zinc-800 text-white font-bold shadow-lg hover:bg-zinc-700 transition"
                     >
-                        GitHub
+                        {t("contact.github")}
                     </motion.a>
 
                     <motion.a
@@ -109,7 +111,7 @@ export default function Contact() {
                         whileTap={{ scale: 0.95 }}
                         className="px-6 py-3 rounded-full bg-blue-600 text-white font-bold shadow-lg hover:bg-blue-700 transition"
                     >
-                        LinkedIn
+                        {t("contact.linkedin")}
                     </motion.a>
                 </div>
             </motion.div>

@@ -1,4 +1,4 @@
-﻿import { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect } from "react";
 import Hero from "./components/sections/Hero";
 import Projects from "./components/sections/Projects";
 import Tech from "./components/sections/Tech";
@@ -8,9 +8,12 @@ import Navibar from "./components/sections/Navibar";
 import Toolbar from "./components/sections/ToolboxBar";
 import InfoDisplay from "./components/ui/InfoDisplay";
 import { motion } from "framer-motion";
+import { useLanguage } from "./context/LanguageContext";
+
 export default function App() {
     const [activeData, setActiveData] = useState(null);
     const detailsRef = useRef(null);
+    const { t } = useLanguage();
 
     const handleSelect = (data) => {
         if (!data) return;
@@ -19,7 +22,6 @@ export default function App() {
     };
 
     useEffect(() => {
-        // Only scroll if activeData is truthy and the element exists
         if (activeData && detailsRef.current) {
             detailsRef.current.scrollIntoView({
                 behavior: "smooth",
@@ -45,14 +47,14 @@ export default function App() {
                                     onClick={() => setActiveData(null)}
                                     className="text-zinc-500 hover:text-white transition"
                                 >
-                                    ✕ Close
+                                    {t("app.close")}
                                 </button>
                             </div>
                             <InfoDisplay project={activeData} />
                         </div>
                     ) : (
                         <div className="text-center py-16 border border-dashed border-zinc-800 rounded-2xl bg-zinc-950/50">
-                            <p className="text-zinc-500">Select a project for further breakdown and details!</p>
+                            <p className="text-zinc-500">{t("app.emptyState")}</p>
                         </div>
                     )}
                 </div>
@@ -65,7 +67,7 @@ export default function App() {
                         whileTap={{ scale: 0.95 }}
                         className="px-6 py-3 rounded-full bg-zinc-800 text-white font-bold shadow-lg hover:bg-zinc-700 transition"
                     >
-                        Visit my GitHub Repositories
+                        {t("app.visitGithub")}
                     </motion.a>
                 </div>
             </Section>

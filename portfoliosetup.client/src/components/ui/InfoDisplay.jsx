@@ -1,5 +1,8 @@
-import { useState } from "react";
+import { useLanguage } from "../../context/LanguageContext";
+
 export default function InfoDisplay({ project }) {
+    const { t } = useLanguage();
+
     if (!project) return null;
 
     return (
@@ -25,7 +28,7 @@ export default function InfoDisplay({ project }) {
                     rel="noopener noreferrer"
                     className="inline-flex items-center gap-2 text-sm font-bold text-black bg-gradient-to-r from-purple-400 to-emerald-400 rounded-full px-5 py-2.5 shadow-lg hover:scale-105 transition-transform"
                 >
-                    View on GitHub
+                    {t("info.viewGithub")}
                 </a>
             )}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">

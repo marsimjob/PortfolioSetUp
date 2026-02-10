@@ -1,8 +1,11 @@
-﻿import { motion } from "framer-motion";
+import { motion } from "framer-motion";
 import ProfileImage from "./ProfileImage";
 import HeroTestimonials from "./HeroTestimonials";
+import { useLanguage } from "../../context/LanguageContext";
 
 export default function Hero() {
+    const { t, language } = useLanguage();
+
     return (
         <section className="relative flex flex-col items-center justify-center px-6 space-y-16">
             {/* Background glow */}
@@ -29,22 +32,21 @@ export default function Hero() {
                     <div className="space-y-2">
                         <h1 className="text-5xl md:text-7xl font-black tracking-tight text-white">
                             Mario Alexandar Simic
-                            <span className="block text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-emerald-400 mt-2 mb-2 tracking-[0.25em]">
-                                SOFTWARE ENGINEER
+                            <span className={`block text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-emerald-400 mt-2 mb-2 ${language === "sv" ? "" : "tracking-[0.25em]"}`}>
+                                {t("hero.subtitle")}
                             </span>
                         </h1>
                     </div>
 
                     {/* Mission */}
                     <p className="text-lg md:text-xl text-zinc-400 leading-relaxed">
-                        <span className="text-zinc-200">Mission:</span> Building high-performance{" "}
-                        <span className="text-zinc-200">backend systems</span> and modern{" "}
-                        <span className="text-zinc-200">React interfaces</span> with precision and
-                        clean architecture.
+                        <span className="text-zinc-200">{t("hero.mission.label")}</span> {t("hero.mission.before")}{" "}
+                        <span className="text-zinc-200">{t("hero.mission.backend")}</span> {t("hero.mission.mid")}{" "}
+                        <span className="text-zinc-200">{t("hero.mission.react")}</span> {t("hero.mission.after")}
                     </p>
 
                     {/* GitHub Contributions */}
-                    <GitHubContributions gitHubUserName="marsimjob" />
+                    <GitHubContributions gitHubUserName="marsimjob" t={t} />
 
                     {/* Testimonials */}
                     <HeroTestimonials />
@@ -65,14 +67,14 @@ export default function Hero() {
                          transition-transform hover:scale-105"
                         >
                             <span className="relative z-10 flex items-center gap-2">
-                                ⇓ Click to know how I can help you!
-                                <span className="group-hover:translate-x-1 transition-transform">⇓</span>
+                                {t("hero.cta")}
+                                <span className="group-hover:translate-x-1 transition-transform">{"\u21D3"}</span>
                             </span>
                             <span className="absolute inset-0 bg-white opacity-0 group-hover:opacity-10 rounded-full transition-opacity" />
                         </motion.button>
 
                         {/* OR separator */}
-                        <span className="text-zinc-400 text-sm font-medium">OR</span>
+                        <span className="text-zinc-400 text-sm font-medium">{t("hero.or")}</span>
 
                         {/* Download CV */}
                         <a
@@ -80,7 +82,7 @@ export default function Hero() {
                             download
                             className="flex-1 text-center px-8 py-6 rounded-full border border-zinc-700 text-white hover:bg-zinc-800 transition"
                         >
-                            📄 Download CV
+                            {t("hero.downloadCv")}
                         </a>
                     </div>
                 </motion.div>
@@ -89,11 +91,11 @@ export default function Hero() {
     );
 }
 
-function GitHubContributions({ gitHubUserName }) {
+function GitHubContributions({ gitHubUserName, t }) {
     return (
         <div className="w-full rounded-2xl bg-zinc-900 p-5 border border-zinc-800 shadow-lg">
             <h3 className="text-sm font-bold uppercase tracking-widest text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-emerald-400 mb-3">
-                GitHub Contributions
+                {t("hero.github.heading")}
             </h3>
             <div className="overflow-x-auto rounded-lg bg-zinc-950 p-3 border border-zinc-700">
                 <img

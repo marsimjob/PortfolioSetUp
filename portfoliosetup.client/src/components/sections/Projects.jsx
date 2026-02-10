@@ -1,13 +1,17 @@
-import { projects } from "../../data/projects";
+import { getProjects } from "../../data/projects";
 import ProjectCard from "../../components/ProjectCard";
 import { motion } from "framer-motion";
+import { useLanguage } from "../../context/LanguageContext";
 
 export default function Projects({ onSelect, activeItem }) {
+    const { language, t } = useLanguage();
+    const projects = getProjects(language);
+
     return (
         <div className="space-y-8">
             <div className="space-y-3">
-                <h2 className="text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-emerald-400">Projects</h2>
-                <p className="text-zinc-400">A selection of what I've been building.</p>
+                <h2 className="text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-emerald-400">{t("projects.heading")}</h2>
+                <p className="text-zinc-400">{t("projects.subtitle")}</p>
             </div>
 
             <motion.div
@@ -20,9 +24,9 @@ export default function Projects({ onSelect, activeItem }) {
                     visible: { transition: { staggerChildren: 0.15 } },
                 }}
             >
-                {projects.map((p, i) => (
+                {projects.map((p) => (
                     <motion.div
-                        key={i}
+                        key={p.repo}
                         variants={{
                             hidden: { opacity: 0, y: 30 },
                             visible: { opacity: 1, y: 0 },
@@ -32,7 +36,7 @@ export default function Projects({ onSelect, activeItem }) {
                         <ProjectCard
                             {...p}
                             onClick={() => onSelect(p)}
-                            isActive={activeItem?.title === p.title}
+                            isActive={activeItem?.repo === p.repo}
                         />
                     </motion.div>
                 ))}

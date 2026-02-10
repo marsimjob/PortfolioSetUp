@@ -1,5 +1,6 @@
-﻿import Card from "./ui/Card";
+import Card from "./ui/Card";
 import Tag from "./ui/Tag";
+import { useLanguage } from "../context/LanguageContext";
 
 export default function ProjectCard({
   title,
@@ -9,6 +10,8 @@ export default function ProjectCard({
   onClick,
   isActive,
 }) {
+  const { t } = useLanguage();
+
   return (
     <Card
       onClick={onClick}
@@ -33,7 +36,7 @@ export default function ProjectCard({
                   ))}
               </div>
         <span className="bg-zinc-800 text-zinc-500 px-2 py-1 rounded text-[10px] uppercase font-bold border border-zinc-700">
-          {isActive ? "OPEN" : "CHECK IT OUT"}
+          {isActive ? t("projects.badge.open") : t("projects.badge.check")}
         </span>
       </div>
 

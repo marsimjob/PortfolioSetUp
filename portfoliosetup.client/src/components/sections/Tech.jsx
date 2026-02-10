@@ -1,15 +1,18 @@
-import { skills } from "../../data/skills";
+import { getSkills } from "../../data/skills";
 import SkillGroup from "../SkillGroup";
 import { motion } from "framer-motion";
+import { useLanguage } from "../../context/LanguageContext";
 
 export default function Tech() {
     const colors = ["purple", "blue", "emerald"];
+    const { language, t } = useLanguage();
+    const skills = getSkills(language);
 
     return (
         <section id="skills" className="space-y-8 overflow-hidden">
             <div className="space-y-3">
-                <h2 className="text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-emerald-400">Tech & Skills</h2>
-                <p className="text-zinc-400">Expertise built across the full stack.</p>
+                <h2 className="text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-emerald-400">{t("tech.heading")}</h2>
+                <p className="text-zinc-400">{t("tech.subtitle")}</p>
             </div>
 
             <motion.div

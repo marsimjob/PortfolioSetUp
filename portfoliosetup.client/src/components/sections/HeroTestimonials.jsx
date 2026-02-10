@@ -1,20 +1,14 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { useLanguage } from "../../context/LanguageContext";
 
 export default function HeroTestimonials() {
+    const { t } = useLanguage();
+
     const quotes = [
-        {
-            text: "Mario has an attention to detail and ability to solve complex problems that is unmatched.",
-            name: "Locker-room Pal, Kviberg",
-        },
-        {
-            text: "Working with Mario elevated our teams productivity and code quality immensely.",
-            name: "Some Guy on the Street, Gothenburg",
-        },
-        {
-            text: "His clean architecture and modern React skills are top-notch!",
-            name: "Some Online Friend, America(?)",
-        },
+        { text: t("testimonial.0.text"), name: t("testimonial.0.name") },
+        { text: t("testimonial.1.text"), name: t("testimonial.1.name") },
+        { text: t("testimonial.2.text"), name: t("testimonial.2.name") },
     ];
 
     const [currentQuote, setCurrentQuote] = useState(0);
@@ -24,7 +18,7 @@ export default function HeroTestimonials() {
             let nextIndex;
             do {
                 nextIndex = Math.floor(Math.random() * quotes.length);
-            } while (nextIndex === currentQuote); // avoid showing same quote twice
+            } while (nextIndex === currentQuote);
 
             setCurrentQuote(nextIndex);
         }, 5000);
