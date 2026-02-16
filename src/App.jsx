@@ -17,7 +17,6 @@ export default function App() {
 
     const handleSelect = (data) => {
         if (!data) return;
-        console.log("State Updating with:", data.title);
         setActiveData(data);
     };
 

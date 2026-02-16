@@ -12,25 +12,25 @@ export default function Contact() {
         e.preventDefault();
         setStatus("sending");
 
-        emailjs.init(import.meta.env.VITE_EMAILJS_PUBLIC_KEY);
+        const publicKey = import.meta.env.VITE_EMAILJS_PUBLIC_KEY;
+        const serviceId = import.meta.env.VITE_EMAILJS_SERVICE_ID;
+        const templateId = import.meta.env.VITE_EMAILJS_TEMPLATE_ID;
 
+        if (!publicKey || !serviceId || !templateId) {
+            setStatus("error");
+            return;
+        }
 
-        emailjs.sendForm(
-            import.meta.env.VITE_EMAILJS_SERVICE_ID,
-            import.meta.env.VITE_EMAILJS_TEMPLATE_ID,
-            form.current,
-            import.meta.env.VITE_EMAILJS_PUBLIC_KEY
-        )
-            .then(
-                (result) => {
-                    console.log("SUCCESS:", result.text);
-                    alert("Message sent!");
-                },
-                (error) => {
-                    console.error("FAILED:", error);
-                    alert("Failed to send message");
-                }
-            );
+        emailjs.init(publicKey);
+        emailjs
+            .sendForm(serviceId, templateId, form.current, publicKey)
+            .then(() => {
+                setStatus("success");
+                form.current.reset();
+            })
+            .catch(() => {
+                setStatus("error");
+            });
     };
 
     return (

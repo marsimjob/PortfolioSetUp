@@ -78,7 +78,7 @@ export default function Hero() {
 
                         {/* Download CV */}
                         <a
-                            href="/documents/Mario_Alexandar_Simic_CV.pdf"
+                            href={`${import.meta.env.BASE_URL}documents/Mario_Alexandar_Simic_CV.pdf`}
                             download
                             className="flex-1 text-center px-8 py-6 rounded-full border border-zinc-700 text-white hover:bg-zinc-800 transition"
                         >
