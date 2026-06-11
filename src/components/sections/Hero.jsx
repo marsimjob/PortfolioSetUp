@@ -8,7 +8,9 @@ export default function Hero() {
 
     return (
         <section className="relative flex flex-col items-center justify-center px-6 space-y-16">
-            <div className="absolute -top-20 w-96 h-96 bg-sky-500/6 blur-[140px] rounded-full -z-10" />
+            <div className="tech-grid absolute -inset-x-12 -top-24 -bottom-8 -z-10 pointer-events-none" />
+            <div className="pulse-glow absolute -top-20 left-1/4 w-96 h-96 bg-sky-500/10 blur-[140px] rounded-full -z-10 pointer-events-none" />
+            <div className="pulse-glow-delayed absolute top-1/3 right-0 w-80 h-80 bg-indigo-500/10 blur-[130px] rounded-full -z-10 pointer-events-none" />
             <div className="flex flex-col md:flex-row items-center gap-10 max-w-6xl w-full">
                 <motion.div
                     initial={{ opacity: 0, x: -80 }}
@@ -65,9 +67,12 @@ export default function Hero() {
                         <a
                             href={`${import.meta.env.BASE_URL}documents/Mario_Alexandar_Simic_CV.pdf`}
                             download
-                            className="inline-flex items-center gap-2 px-6 py-3 rounded-full text-sm font-bold
+                            className="group relative inline-flex items-center gap-2 px-6 py-3 rounded-full text-sm font-bold
                                 border border-white/10 text-slate-300 hover:border-white/20 hover:text-white transition"
                         >
+                            <span className="paper-pop absolute left-1/2 top-0 text-3xl" aria-hidden>
+                                📄
+                            </span>
                             {t("hero.downloadCv")}
                         </a>
                     </div>

@@ -49,24 +49,40 @@ export default function Projects({ onSelect, activeItem }) {
                                 visible: { transition: { staggerChildren: 0.1 } },
                             }}
                         >
-                            {grouped[cat].map((p) => (
-                                <motion.div
-                                    key={p.repo}
-                                    variants={{
-                                        hidden: { opacity: 0, y: 20 },
-                                        visible: { opacity: 1, y: 0 },
-                                    }}
-                                    transition={{ duration: 0.5, ease: "easeOut" }}
-                                >
-                                    <div id={`project-${p.repo.split("/").pop()}`}>
-                                        <ProjectCard
-                                            {...p}
-                                            onClick={() => onSelect(p)}
-                                            isActive={activeItem?.repo === p.repo}
-                                        />
-                                    </div>
-                                </motion.div>
-                            ))}
+                            {grouped[cat].map((p) => {
+                                const isOpen = activeItem?.repo === p.repo;
+                                return (
+                                    <motion.div
+                                        key={p.repo}
+                                        variants={{
+                                            hidden: { opacity: 0, y: 20 },
+                                            visible: { opacity: 1, y: 0 },
+                                        }}
+                                        transition={{ duration: 0.5, ease: "easeOut" }}
+                                    >
+                                        <div id={`project-${p.repo.split("/").pop()}`} className="h-full">
+                                            {isOpen ? (
+                                                <div className="h-full min-h-[170px] rounded-xl border border-dashed border-sky-500/25 bg-sky-500/5 flex items-center justify-center">
+                                                    <span className="text-xs font-mono text-sky-400/50">
+                                                        {p.title} ↓
+                                                    </span>
+                                                </div>
+                                            ) : (
+                                                <motion.div
+                                                    layoutId={`proj-${p.repo}`}
+                                                    transition={{ type: "spring", stiffness: 180, damping: 22 }}
+                                                    className="h-full"
+                                                >
+                                                    <ProjectCard
+                                                        {...p}
+                                                        onClick={() => onSelect(p)}
+                                                    />
+                                                </motion.div>
+                                            )}
+                                        </div>
+                                    </motion.div>
+                                );
+                            })}
                         </motion.div>
                     </div>
                 )
